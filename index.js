@@ -46,3 +46,18 @@ function getCurrentTime() {
   );
 }
 setInterval(getCurrentTime, 1000);
+// `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid={e9cb18007d14ff1ec5215a3baaafa545}`
+navigator.geolocation.getCurrentPosition((position) => {
+  fetch(
+    `https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=imperial`
+  )
+    .then((res) => {
+      if (!res.ok) {
+        throw Error("Weather data not available");
+      }
+      return res.json;
+    })
+    .then((data) => {
+      console.log(data);
+    });
+});
